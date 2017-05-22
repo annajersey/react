@@ -1,5 +1,33 @@
-function greeter(){
-    document.write('From greeter function');
-}
+var React = require('react');
+var GreeterMessage = require('./GreeterMessage.jsx');
+var GreeterForm = require('./GreeterForm.jsx');
+var Greeter = React.createClass({
+    getDefaultProps: function () {
+        return {
+            name:'Defult prop',
+            message:'Defult mess'
+        }
+    },
+    getInitialState: function () {
+        return {
+            name:this.props.name,
+            message:this.props.message
+        };
+    },
+    handleNewData: function (updates) {
+        this.setState(updates);
+    },
+    render:
+            function () {
+            var name=this.state.name;
+            var message=this.state.message;
+            return (
+                    <div>
 
-module.exports = greeter;
+                        <GreeterMessage name={name} message={message}/>
+                        <GreeterForm onNewData={this.handleNewData}/>
+                    </div>
+                );
+            }
+    });
+module.exports = Greeter;
